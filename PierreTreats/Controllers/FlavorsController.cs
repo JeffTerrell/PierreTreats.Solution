@@ -42,5 +42,22 @@ namespace PierreTreats.Controllers
       .FirstOrDefault(flavor => flavor.FlavorId == Id);
       return View(thisFlavor);
     }
+
+    [HttpPost]
+    public ActionResult Edit(Flavor flavor)
+    {
+      _db.Entry(flavor).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = flavor.FlavorId });
+    }
+
+    [HttpPost]
+    public ActionResult Delete(Flavor flavor)
+    {
+      Flavor thisFlavor = _db.Flavors.FirstOrDefault(find => find.FlavorId == flavor.FlavorId);
+      _db.Flavors.Remove(thisFlavor);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }
