@@ -33,5 +33,31 @@ namespace PierreTreats.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    public ActionResult Details(int Id)
+    {
+      Treat thisTreat = _db.Treats
+      .Include(treat => treat.JoinFlavor)
+      .ThenInclude(join => join.Flavor)
+      .FirstOrDefault(treat => treat.TreatId == Id);
+      return View(thisTreat);
+    }
+
+    [HttpPost]
+    public ActionResult Edit (Treat treat)
+    {
+      _db.Entry(treat).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = treat.TreatId });
+    }
+
+    [HttpPost]
+    public ActionResult Delete (Treat treat)
+    {
+      Treat thisTreat = _db.Treats.FirstOrDefault(find => find.TreatId == treat.TreatId);
+      _db.Treats.Remove(thisTreat);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }

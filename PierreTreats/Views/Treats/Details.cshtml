@@ -1,0 +1,54 @@
+@{
+  Layout = "_Layout";
+}
+
+@using PierreTreats.Models
+@model Treat
+
+
+<h1>Pierre's Infamous Treats</h1>
+<h3>@Html.DisplayFor(treat => treat.Name) Details</h3>
+
+@if (@Model.JoinFlavor.Count == 0)
+{
+  <p>No flavors are used in this treat</p>
+}
+
+else
+{
+  <h3>Flavors used in this treat</h3>
+  @foreach (var flavor in Model.JoinFlavor)
+  {
+    @Html.ActionLink($"{flavor.Flavor.Name}", "Details", "Treats", new { id = flavor.Flavor.FlavorId })
+  }
+}
+<div id="edit-button-div">
+  <button type="button" class="btn btn-dark" id="edit-button">Edit treat</button>
+</div>
+<div id="edit-form-div" class="hidden">
+  @using(Html.BeginForm("Edit", "Treats", FormMethod.Post))
+  {
+    <ul>
+    @Html.HiddenFor(model => model.TreatId)
+    <li>@Html.LabelFor(model => model.Name)
+    @Html.EditorFor(model => model.Name)</li>
+    </ul>
+    <input type="submit", value="Edit treat", class="btn btn-success"/>
+    <button type="button" class="btn btn-dark" id="stop-edit-button">Cancel edit</button>
+  }
+</div>
+<br>
+<div id="delete-button-div">
+  <button type="button" class="btn btn-dark" id="delete-button">Delete treat</button>
+</div>
+<div id="delete-confirm-div" class="hidden">
+  @using(Html.BeginForm("Delete", "Treats", FormMethod.Post))
+  {
+    @Html.HiddenFor(model => model.TreatId)
+    <input type="submit" value="Confirm Delete Treat", class="btn btn-danger"/>
+    <button type="button" class="btn btn-dark" id="stop-delete-button">Cancel delete</button> 
+  }
+</div>
+
+
+<script src="~/js/buttonactions.js"></script>
