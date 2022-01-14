@@ -71,5 +71,14 @@ namespace PierreTreats.Controllers
       _db.SaveChanges();
       return RedirectToAction("Details", new { id = flavor.FlavorId });
     }
+
+    [HttpPost]
+    public ActionResult DeleteTreat(Flavor flavor, int joinId)
+    {
+      FlavorTreat joinEntry = _db.FlavorTreats.FirstOrDefault(find => find.FlavorTreatId == joinId);
+      _db.FlavorTreats.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = flavor.FlavorId });
+    }
   }
 }

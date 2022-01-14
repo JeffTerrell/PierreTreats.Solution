@@ -20,7 +20,6 @@
     <button type="button" class="btn btn-dark" id="stop-add-button">Cancel add treat</button>
     <br>
     @Html.HiddenFor(model => model.FlavorId)
-    @Html.Label("")
     @Html.DropDownList("TreatId")
   }
   </div>
@@ -30,12 +29,35 @@
 else
 {
   <h3>Treats using this flavor</h3>
+  <ul>
   @foreach (var treat in Model.JoinTreat)
   {
+    <li>
     @Html.ActionLink($"{treat.Treat.Name}", "Details", "Treats", new { id = treat.Treat.TreatId })
+    @using (Html.BeginForm("DeleteTreat", "Flavors"))
+    {
+      @Html.HiddenFor(model => model.FlavorId)
+      @Html.Hidden("joinId", @treat.FlavorTreatId)
+      <input type="submit" value="Delete" class="btn btn-danger btn-sm"/>
+    }
+    </li>
   }
+  </ul>
+  <div id="add-button-div">
+    <button type="button" class="btn btn-dark" id="add-button">Add treat using this flavor</button>
+  </div>
+  <div id="add-form-div" class="hidden">  
+  @using (Html.BeginForm("AddTreat", "Flavors"))
+  {    
+    <input type="submit" class="btn btn-success" value="Add treat" />
+    <button type="button" class="btn btn-dark" id="stop-add-button">Cancel add treat</button>
+    <br>
+    @Html.HiddenFor(model => model.FlavorId)
+    @Html.DropDownList("TreatId")
+  }
+  </div>
 }
-
+<br>
 <div id="edit-button-div">
   <button type="button" class="btn btn-dark" id="edit-button">Edit flavor</button>
 </div>
