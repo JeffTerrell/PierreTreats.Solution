@@ -12,16 +12,54 @@
 @if (@Model.JoinFlavor.Count == 0)
 {
   <p>No flavors are used in this treat</p>
+  <div id="add-button-div">
+  <button type="button" class="btn btn-dark" id="add-button">Add flavor used in this treat:</button>
+</div>
+<div id="add-form-div" class="hidden">  
+@using (Html.BeginForm("AddFlavor", "Treats"))
+{    
+  <input type="submit" class="btn btn-success" value="Add flavor" />
+  <button type="button" class="btn btn-dark" id="stop-add-button">Cancel add flavor</button>
+  <br>
+  @Html.HiddenFor(model => model.TreatId)
+  @Html.DropDownList("FlavorId")
+}
+</div>
+<br>
 }
 
 else
 {
   <h3>Flavors used in this treat</h3>
+  <ul>
   @foreach (var flavor in Model.JoinFlavor)
   {
+    <li>
     @Html.ActionLink($"{flavor.Flavor.Name}", "Details", "Flavors", new { id = flavor.Flavor.FlavorId })
+    @using (Html.BeginForm("DeleteFlavor", "Treats"))
+    {
+      @Html.HiddenFor(model => model.TreatId)
+      @Html.Hidden("joinId", @flavor.FlavorTreatId)
+      <input type="submit" value="Delete" class="btn btn-danger btn-sm"/>
+    }
+    </li>
   }
+  </ul>
+  <div id="add-button-div">
+  <button type="button" class="btn btn-dark" id="add-button">Add flavor used in this treat:</button>
+  </div>
+  <div id="add-form-div" class="hidden">  
+  @using (Html.BeginForm("AddFlavor", "Treats"))
+    {    
+    <input type="submit" class="btn btn-success" value="Add flavor" />
+    <button type="button" class="btn btn-dark" id="stop-add-button">Cancel add flavor</button>
+    <br>
+    @Html.HiddenFor(model => model.TreatId)
+    @Html.DropDownList("FlavorId")
+  }
+  </div>
 }
+<br>
 <div id="edit-button-div">
   <button type="button" class="btn btn-dark" id="edit-button">Edit treat</button>
 </div>
