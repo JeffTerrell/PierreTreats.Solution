@@ -29,7 +29,6 @@ namespace PierreTreats
         .AddDbContext<PierreTreatsContext>(options => options
         .UseMySql(Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
 
-      //new code
       services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<PierreTreatsContext>()
                 .AddDefaultTokenProviders();
