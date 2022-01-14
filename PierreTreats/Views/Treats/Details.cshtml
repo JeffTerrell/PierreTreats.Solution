@@ -19,7 +19,7 @@ else
   <h3>Flavors used in this treat</h3>
   @foreach (var flavor in Model.JoinFlavor)
   {
-    @Html.ActionLink($"{flavor.Flavor.Name}", "Details", "Treats", new { id = flavor.Flavor.FlavorId })
+    @Html.ActionLink($"{flavor.Flavor.Name}", "Details", "Flavors", new { id = flavor.Flavor.FlavorId })
   }
 }
 <div id="edit-button-div">

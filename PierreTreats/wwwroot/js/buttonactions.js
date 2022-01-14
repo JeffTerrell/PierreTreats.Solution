@@ -1,3 +1,13 @@
+$("#add-button").on("click", () => {
+  $("#add-button-div").slideUp();
+  $("#add-form-div").slideDown();
+});
+
+$("#stop-add-button").on("click", () => {
+  $("#add-form-div").slideUp();
+  $("#add-button-div").slideDown();
+})
+
 $("#edit-button").on("click", () => {
   $("#edit-button-div").slideUp();
   $("#edit-form-div").slideDown();
