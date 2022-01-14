@@ -1,0 +1,17 @@
+@{
+  Layout = "_Layout";
+}
+
+@model PierreTreats.Models.Flavor
+
+<h1>Add a new flavor</h1>
+
+@using (Html.BeginForm("Create", "Flavors", FormMethod.Post))
+{
+  <ul>
+  <li>@Html.LabelFor(model => model.Name)
+  @Html.TextBoxFor(model => model.Name, new {@required = "required"})</li>
+  </ul>
+  
+  <input type="submit", value="Add flavor", class="btn btn-dark"/>
+}
