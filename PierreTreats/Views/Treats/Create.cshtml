@@ -1,0 +1,19 @@
+@{
+  Layout = "_Layout";
+}
+
+@using PierreTreats.Models
+@model Treat
+
+<h1>Add a new treat</h1>
+
+@using (Html.BeginForm("Create", "Treats", FormMethod.Post))
+{
+  <ul>
+  <li>@Html.LabelFor(model => model.Name)
+  @Html.TextBoxFor(model => model.Name, new {@required = "required"})</li>
+  </ul>
+  
+  <input type="submit", value="Add treat", class="btn btn-dark"/>
+}
+  
