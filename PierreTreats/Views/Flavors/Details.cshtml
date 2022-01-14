@@ -1,0 +1,22 @@
+@{
+  Layout = "_Layout";
+}
+
+@using PierreTreats.Models
+@model Flavor
+
+<h1>@Html.DisplayFor(flavor =>flavor.Name) Details</h1>
+
+@if (@Model.JoinTreat.Count == 0)
+{
+  <p>No treats are using this flavor</p>
+}
+
+else
+{
+  <h3>Treats using this flavor</h3>
+  @foreach (var treat in Model.JoinTreat)
+  {
+    @Html.ActionLink($"{treat.Treat.Name}", "Details", "Treats", new { id = treat.Treat.TreatId })
+  }
+}
