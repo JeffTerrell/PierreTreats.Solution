@@ -39,7 +39,7 @@ else
 <div id="delete-button-div">
   <button type="button" class="btn btn-dark" id="delete-button">Delete flavor</button>
 </div>
-<div id="delete-form-div" class="hidden">
+<div id="delete-confirm-div" class="hidden">
   @using(Html.BeginForm("Delete", "Flavors", FormMethod.Post))
   {
     @Html.HiddenFor(model => model.FlavorId)
