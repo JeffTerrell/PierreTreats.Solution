@@ -31,7 +31,7 @@ else
     <li>@Html.LabelFor(model => model.Name)
     @Html.EditorFor(model => model.Name)</li>
     </ul>
-    <input type="submit", value="Edit flavor", class="btn btn-dark"/>
+    <input type="submit", value="Edit flavor", class="btn btn-success"/>
     <button type="button" class="btn btn-dark" id="stop-edit-button">Cancel edit</button>
   }
 </div>
@@ -43,7 +43,7 @@ else
   @using(Html.BeginForm("Delete", "Flavors", FormMethod.Post))
   {
     @Html.HiddenFor(model => model.FlavorId)
-    <input type="submit" value="Confirm Delete Flavor", class="btn btn-dark"/>
+    <input type="submit" value="Confirm Delete Flavor", class="btn btn-danger"/>
     <button type="button" class="btn btn-dark" id="stop-delete-button">Cancel delete</button> 
   }
 </div>
