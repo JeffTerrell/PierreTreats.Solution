@@ -5,9 +5,7 @@
 @using PierreTreats.Models
 @model Treat
 
-
-<h1>Pierre's Infamous Treats</h1>
-<h3>@Html.DisplayFor(treat => treat.Name) Details</h3>
+<h1>@Html.DisplayFor(treat => treat.Name) Details</h1>
 
 @if (@Model.JoinFlavor.Count == 0)
 {
@@ -30,7 +28,7 @@
 
 else
 {
-  <h3>Flavors used in this treat</h3>
+  <h5>Flavors used in this treat</h5>
   <ul>
   @foreach (var flavor in Model.JoinFlavor)
   {
