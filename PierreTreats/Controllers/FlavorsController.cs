@@ -71,8 +71,11 @@ namespace PierreTreats.Controllers
     [HttpPost]
     public ActionResult AddTreat(Flavor flavor, int TreatId)
     {
-      Treat thisTreat = _db.Treats.FirstOrDefault(find => find.TreatId == TreatId);
-      if (TreatId != 0 && thisTreat.JoinFlavor.Where(find => find.TreatId == TreatId).Count() != TreatId)
+      Treat thisTreat = _db.Treats
+      .Include(treat => treat.JoinFlavor)
+      .ThenInclude(join => join.Flavor)
+      .FirstOrDefault(treat => treat.TreatId == TreatId);
+      if (TreatId != 0 && thisTreat.JoinFlavor.Where(find => find.TreatId == TreatId).Count() < 1)
       {
       _db.FlavorTreats.Add(new FlavorTreat() { TreatId = TreatId , FlavorId = flavor.FlavorId});
       }

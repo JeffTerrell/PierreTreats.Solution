@@ -72,7 +72,7 @@ namespace PierreTreats.Controllers
     public ActionResult AddFlavor(Treat treat, int FlavorId)
     {
       Flavor thisFlavor = _db.Flavors.FirstOrDefault(find => find.FlavorId == FlavorId);
-      if (FlavorId != 0 && thisFlavor.JoinTreat.Where(find => find.FlavorId == FlavorId).Count() != FlavorId)
+      if (FlavorId != 0 && thisFlavor.JoinTreat.Where(find => find.FlavorId == FlavorId).Count() < 1)
       {
       _db.FlavorTreats.Add(new FlavorTreat() { FlavorId = FlavorId , TreatId = treat.TreatId});
       }
