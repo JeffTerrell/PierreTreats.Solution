@@ -15,9 +15,20 @@
         <li class="nav-item">
           <a class="nav-link" href="~/Treats">Treats</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="~/Account">Log In</a>
-        </li>  
+        @if (!User.Identity.IsAuthenticated)
+        {
+          <li class="nav-item">
+            <a class="nav-link" href="~/Account/Login">Log In</a>
+          </li>
+          <p class="nav-link active">Not logged into account</p>  
+        }
+        else
+        {
+          <li class="nav-item">
+            <a class="nav-link" href="~/Account">Log Out</a>
+          </li>
+          <p class="nav-link active">Logged in as @User.Identity.Name</p>  
+        }
       </ul>
     </div>
   </div>
